@@ -1,0 +1,37 @@
+{% extends "./base.html" %}
+{% load static %}
+{% block title %}Packages{% endblock %}
+{% block content %}
+
+
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="h1 fw-bold">You're now seeing your packages</h1>
+        Hi {{ user.username }}! Here's the list of your packages
+        {% for p in packages %}
+          <div class="col">
+            <div class="card shadow-sm">
+              <img class="img-fluid" alt="Responsive image" src="{{ p.image.url }}">
+              <div class="card-body">
+                <p class="card-text">
+                  <a class="text-dark text-decoration-none" href="{{ p.get_absolute_url }}">{{ p.title }}</a>
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted">{{p.description}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor%}
+      </div>
+    </div>
+  </section>
+
+
+
+</main>
+
+{% endblock %}

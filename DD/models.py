@@ -58,12 +58,27 @@ class Employee(models.Model):
     
     
 class Package(models.Model):
-    purchased_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Package_creator')
+    purchased_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='package_creator')
+    delivered_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='package_deliverer')
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/')
     slug = models.SlugField(max_length=255)
-    status = models.CharField(max_length=255, default='In warehouse')    
+        
+        
+    DELIV = 'DELIVERED'
+    IN_DELIV = 'IN_DELIV'
+    DELIV_FAIL = 'DELIV_FAIL'
+    IN_WH = 'IN_WH'
+    
+    available_status = (
+        (DELIV, 'Delivered'),
+        (IN_DELIV, 'In delivery'),
+        (DELIV_FAIL, 'Delivery failed'),
+        (IN_WH, 'In warehouse'),
+    )
+
+    status = models.CharField(max_length=255, choices=available_status, default=IN_WH)    
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     

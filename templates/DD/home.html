@@ -13,7 +13,9 @@
         {% if user.is_authenticated %}
           Hi {{ user.username }}! What do you want to do?   
         {% else %}
-          <p class="lead text-muted">Do you want something delivered? Make an account!</p>
+          <p class="lead text-muted">Do you want something delivered? 
+            <a href={% url 'custom_auth:register' %}>Make an account!</a>
+          </p>
         {% endif %}
 
       </div>

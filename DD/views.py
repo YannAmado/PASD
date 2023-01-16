@@ -29,6 +29,12 @@ def driver_route(request):
     emp = Employee.objects.filter(user=request.user)
     return render(request, 'DD/employees/driver/routes.html', {'employee': emp})
 
+def driver_packages(request):
+    pac = Package.objects.filter(delivered_by=request.user)
+    return render(request, 'DD/packages.html', {'packages': pac})
+
+
+
     
 
     
