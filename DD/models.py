@@ -1,18 +1,39 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 
 # Create your models here.
+
+class Available_days(models.Model):
+        days = (
+        ('SUNDAY', 'Sunday'),
+        ('MONDAY', 'Monday'),
+        ('TUESDAY', 'Tuesday'),
+        ('WEDNESDAY', 'Wednesday'),
+        ('THURSDAY', 'Thursday'),
+        ('FRIDAY', 'Friday'),
+        ('SATURDAY', 'Saturday'),
+    )
+        
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, 
                                 null=True, related_name='customer')
     first_name = models.CharField(max_length=255)    
     last_name = models.CharField(max_length=255)    
-    timeframes = models.CharField(max_length=1000)    
     slug = models.SlugField(max_length=255, null=True)
+    
+
+    part_of_day = (
+        ('MORNING', 'Morning'),
+        ('AFTERNOON', 'Afternoon'),
+        ('EVENING', 'Evening')
+    )
+    
+    #available_days = models.ManyToManyField(Available_days)
+    available_days = models.CharField(max_length=50)
+    available_parts_days = models.CharField(max_length=50, choices=part_of_day)
+
     
     def get_absolute_url(self):
         return reverse("DD:Customer_detail",args=[self.slug])
@@ -87,7 +108,8 @@ class Package(models.Model):
         ordering = ('-created',)
         
     def get_absolute_url(self):
-        return reverse("DD:Package_detail",args=[self.slug])
+        return reverse("DD:package_detail",args=[self.slug])
         
     def __str__(self):
         return self.title
+    
