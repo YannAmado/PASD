@@ -4,8 +4,10 @@ from django.urls import reverse
 
 # Create your models here.
 class Customer(models.Model):
-    first_name = models.CharField(max_length=255, blank=False)
-    last_name = models.CharField(max_length=255, blank=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, 
+                                null=True, related_name='customer')
+    first_name = models.CharField(max_length=255)    
+    last_name = models.CharField(max_length=255)    
     timeframes = models.CharField(max_length=1000)    
     slug = models.SlugField(max_length=255, null=True)
     
@@ -16,24 +18,26 @@ class Customer(models.Model):
         return self.first_name + self.last_name
     
 class Employee(models.Model):
-    first_name = models.CharField(max_length=255, blank=False)
-    last_name = models.CharField(max_length=255, blank=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, 
+                                null=False, related_name='employee')
+    first_name = models.CharField(max_length=255)    
+    last_name = models.CharField(max_length=255)  
     salary = models.FloatField()
     
     DRIVER = 'DRIVER'
     WHW = 'WAREHOUSE WORKER'
     WHM = 'WAREHOUSE MANAGER'
     available_positions = (
-        (DRIVER, 'Driver'),
-        (WHW, 'Warehouse Worker'),
-        (WHM, 'Warehouse Manager')
+        (DRIVER, 'driver'),
+        (WHW, 'warehouse Worker'),
+        (WHM, 'warehouse Manager')
     )
     
     VAN = 'VAN'
     BIKE = 'BICYCLE'
     available_vehicles = (
-        (VAN, 'Van'),
-        (BIKE, 'Bicycle')
+        (VAN, 'van'),
+        (BIKE, 'bicycle')
     )
     
     position = models.CharField(max_length=50, choices=available_positions)

@@ -14,8 +14,7 @@ class PackageAdmin(admin.ModelAdmin):
     
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name', 'salary',
-                    'position', 'vehicle'] 
+    list_display = ['first_name', 'last_name', 'salary','position', 'vehicle'] 
     prepopulated_fields = {'slug': ('position','first_name')}
     
     
