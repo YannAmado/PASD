@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 
 from .models import Package, Employee, Customer
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 def customer_detail(request, slug):
@@ -22,5 +24,8 @@ def package_detail(request, slug):
 def user_track_packages(request, package_slug):
     packages = Package.objects.filter(user=request.user)
     return render(request, 'DD/users/customer.html', {'packages': packages})
+
+
+    
 
     
