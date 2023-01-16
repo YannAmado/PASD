@@ -1,0 +1,34 @@
+{% extends "../base.html" %}
+{% load static %}
+{% block title %}{{package.title}}{% endblock %}
+{% block content %}
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">{{package.title}}</h3>
+            <div class="row">
+                <div class="col-lg-5 col-md-5 col-sm-6">
+                    <div class="white-box text-center">
+                        <img src="{{ package.image.url }}" class="img-responsive" style="width:300px;height:auto;"></div>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-6">
+                    <h4 class="box-title mt-5">Product description</h4>
+                    <p>{{package.description}}</p>
+
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-check text-success"></i>Status: {{package.get_status_display}}</li>
+                        <li><i class="fa fa-check text-success"></i>Delivered by: {{package.delivered_by.first_name}}</li>
+                        <li><i class="fa fa-check text-success"></i>Last update:{{package.updated}}</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

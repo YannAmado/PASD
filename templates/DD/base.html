@@ -12,11 +12,95 @@
 
 <body>
     <header>
-
         {% if user.is_authenticated %}
 
-            {% if user.employee.position == 'driver' %}
+            {% if user.employee.position == 'DRIVER' %}
+            <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">DisruptiveDelivery</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" aria-current="page" href="{% url 'DD:driver_route' %}">Routes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{% url 'DD:driver_packages' %}">Packages</a>
+                            </li>
+                        </ul>  
+                        Hi {{ user.username }}! 
+                        <a href="{% url 'custom_auth:logout' %}" class="btn btn-info" role="button">Log out</a>
+                    </div>
+                </div>
+            </nav>
 
+            {% elif user.employee.position == 'WAREHOUSE WORKER' %}
+            <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">DisruptiveDelivery</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse"> 
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" aria-current="page" href="{% url 'admin:index' %}">Register Packages</a>
+                            </li>
+                        </ul>  
+                        Hi {{ user.username }}! 
+                        <a href="{% url 'custom_auth:logout' %}" class="btn btn-info" role="button">Log out</a>
+                    </div>
+                </div>
+            </nav>
+
+            {% elif user.employee.position == 'WAREHOUSE MANAGER'%}
+            <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">DisruptiveDelivery</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse"> 
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" aria-current="page" href="{% url 'admin:index' %}">Go to admin panel</a>
+                            </li>
+                        </ul>  
+                        Hi {{ user.username }}! 
+                        <a href="{% url 'custom_auth:logout' %}" class="btn btn-info" role="button">Log out</a>
+                    </div>
+                </div>
+            </nav>
+            {% else %}
+            <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">DisruptiveDelivery</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse"> 
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item active">
+                                <a class="nav-link" aria-current="page" href="/">Check your packages</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" aria-current="page" href="{% url 'DD:customer_edit_timeframe' %}">Edit your timeframe</a>
+                            </li>
+                        </ul>  
+                        Hi {{ user.username }}! 
+                        <a href="{% url 'custom_auth:logout' %}" class="btn btn-info" role="button">Log out</a>
+                    </div>
+                </div>
+            </nav>
+            {% endif %}
+        
+        {% else %}
             <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">DisruptiveDelivery</a>
@@ -27,47 +111,19 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
                             <li class="nav-item active">
-                                <a class="nav-link" aria-current="page" href="/">Routes</a>
+                                <a class="nav-link" aria-current="page" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Packages</a>
+                                <a class="nav-link" href="#">Link</a>
                             </li>
                         </ul>  
-                        Hi {{ user.username }}!   
-                        <a href="/accounts/logout" class="btn btn-info" role="button">Log out</a>
+                        <a href="/accounts/login" class="btn btn-info" role="button">Log in</a>
                     </div>
                 </div>
             </nav>
 
-            {% endif %}
-        
-        {% else %}
-        <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">DisruptiveDelivery</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item active">
-                            <a class="nav-link" aria-current="page" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                    </ul>  
-                    <a href="/accounts/login" class="btn btn-info" role="button">Log in</a>
-                </div>
-            </div>
-        </nav>
-
         {% endif %}
-                </div>
-            </div>
-        </nav>
-    </header>
+
     <div id="content">{% block content %} {% endblock %}</div>
 
     <!-- Footer -->

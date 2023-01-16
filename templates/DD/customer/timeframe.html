@@ -1,0 +1,17 @@
+{% extends "../base.html" %}
+{% load static %}
+{% block title %}Hello Customer!{% endblock %}
+{% block content %}
+
+
+<main>
+
+    <form action="{% url 'DD:customer_edit_timeframe'%}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+
+</main>
+
+{% endblock %}  
