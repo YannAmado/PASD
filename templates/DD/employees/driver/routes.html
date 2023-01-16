@@ -1,0 +1,24 @@
+{% extends "../../base.html" %}
+{% load static %}
+{% block title %}Routes{% endblock %}
+{% block content %}
+
+
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="h1 fw-bold">This is your current route</h1>
+        <img src="https://www.odtap.com/wp-content/uploads/2019/04/Route-optimization-software-odtap.jpg" alt="route" width = '300' height = '300'>
+        <br>
+        Hi {{ user.username }}! You're know checking your route
+      </div>
+    </div>
+  </section>
+
+
+
+</main>
+
+{% endblock %}

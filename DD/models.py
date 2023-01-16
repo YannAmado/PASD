@@ -31,16 +31,16 @@ class Employee(models.Model):
     WHW = 'WAREHOUSE WORKER'
     WHM = 'WAREHOUSE MANAGER'
     available_positions = (
-        (DRIVER, 'driver'),
-        (WHW, 'warehouse Worker'),
-        (WHM, 'warehouse Manager')
+        (DRIVER, 'Driver'),
+        (WHW, 'Warehouse Worker'),
+        (WHM, 'Warehouse Manager')
     )
     
     VAN = 'VAN'
     BIKE = 'BICYCLE'
     available_vehicles = (
-        (VAN, 'van'),
-        (BIKE, 'bicycle')
+        (VAN, 'Van'),
+        (BIKE, 'Bicycle')
     )
     
     position = models.CharField(max_length=50, choices=available_positions)
@@ -55,15 +55,6 @@ class Employee(models.Model):
     
     def __str__(self):
         return self.first_name + self.last_name
-    
-#@receiver(post_save, sender=User)
-#def create_user_employee(sender, instance, created, **kwargs):
-#    if created:
-#        Employee.objects.create(user=instance)
-
-#@receiver(post_save, sender=User)
-#def save_useremployee(sender, instance, **kwargs):
-#    instance.employee.save()  
     
     
 class Package(models.Model):

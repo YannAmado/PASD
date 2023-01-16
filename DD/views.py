@@ -25,6 +25,9 @@ def user_track_packages(request, package_slug):
     packages = Package.objects.filter(user=request.user)
     return render(request, 'DD/users/customer.html', {'packages': packages})
 
+def driver_route(request):
+    emp = Employee.objects.filter(user=request.user)
+    return render(request, 'DD/employees/driver/routes.html', {'employee': emp})
 
     
 
