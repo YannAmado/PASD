@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('DD.urls', namespace='DD')),
     path('', include('custom_auth.urls', namespace='custom_auth')),
+    path('', include('custom_api.urls', namespace='custom_api')),
+    
 ]
 
 if settings.DEBUG:
