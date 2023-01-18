@@ -30,6 +30,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="{% url 'DD:driver_packages' %}">Packages</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="{% url 'admin:index' %}">Edit Packages</a>
+                            </li>
                         </ul>  
                         Hi {{ user.username }}! 
                         <a href="{% url 'custom_auth:logout' %}" class="btn btn-info" role="button">Log out</a>
