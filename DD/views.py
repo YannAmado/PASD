@@ -32,7 +32,8 @@ def all_packages(request):
 
 def package_detail(request, slug):
     package = get_object_or_404(Package, slug=slug)
-    return render(request, 'DD/packages/detail.html', {'package': package})
+    deliverer = Employee.objects.filter(user=package.delivered_by)[0]
+    return render(request, 'DD/packages/detail.html', {'package': package, 'deliverer': deliverer})
 
 def user_track_packages(request, package_slug):
     packages = Package.objects.filter(user=request.user)

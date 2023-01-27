@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
+
 # Create your models here.
 
 class Available_days(models.Model):
@@ -23,6 +24,10 @@ class Customer(models.Model):
     last_name = models.CharField(max_length=255)    
     slug = models.SlugField(max_length=255, null=True)
     
+    street_and_number = models.CharField(max_length=255, default='Nothing')
+    zipcode = models.CharField(max_length=255, default='1111')
+    city = models.CharField(max_length=255, default='Groningen')
+    country = models.CharField(max_length=255, default='Netherlands')
 
     part_of_day = (
         ('MORNING', 'Morning'),
@@ -31,8 +36,8 @@ class Customer(models.Model):
     )
     
     #available_days = models.ManyToManyField(Available_days)
-    available_days = models.CharField(max_length=50)
-    available_parts_days = models.CharField(max_length=50, choices=part_of_day)
+    available_days = models.CharField(max_length=50, default='Monday')
+    available_parts_days = models.CharField(max_length=50, choices=part_of_day, default='Morning')
 
     
     def get_absolute_url(self):
@@ -46,7 +51,7 @@ class Employee(models.Model):
                                 null=False, related_name='employee')
     first_name = models.CharField(max_length=255)    
     last_name = models.CharField(max_length=255)  
-    salary = models.FloatField()
+    salary = models.FloatField(default=0.0)
     
     DRIVER = 'DRIVER'
     WHW = 'WAREHOUSE WORKER'
@@ -77,6 +82,17 @@ class Employee(models.Model):
     def __str__(self):
         return self.first_name + self.last_name
     
+class Delivery(models.Model):
+    order_id = models.IntegerField(default=50, primary_key=True)
+    expected_delivery_datetime = models.DateTimeField(auto_now=False)
+    actual_delivery_datetime = models.DateTimeField(auto_now=False)
+    cost_in_cents = models.FloatField(default=0.0)
+    
+    class Meta:
+        verbose_name_plural = 'Deliveries'
+        
+    def __str__(self):
+        return 'order: ' + str(self.order_id)
     
 class Package(models.Model):
     purchased_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='package_creator')
@@ -85,7 +101,6 @@ class Package(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/')
     slug = models.SlugField(max_length=255)
-        
         
     DELIV = 'DELIVERED'
     IN_DELIV = 'IN_DELIV'
@@ -103,6 +118,16 @@ class Package(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
+    send_date = models.DateTimeField(auto_now=True)
+    x_in_mm = models.FloatField(default=0.0)
+    y_in_mm = models.FloatField(default=0.0)
+    z_in_mm = models.FloatField(default=0.0)
+    is_breakable = models.BooleanField(default=False)
+    is_perishable = models.BooleanField(default=False)
+    
+    #last_delivery = models.OneToOneField(Delivery, on_delete=models.CASCADE, null=True, blank=True)
+    last_delivery = models.ForeignKey(Delivery, on_delete=models.CASCADE, related_name='last_delivery')
+    
     class Meta:
         verbose_name_plural = 'Packages'
         ordering = ('-created',)
@@ -112,4 +137,5 @@ class Package(models.Model):
         
     def __str__(self):
         return self.title
+    
     

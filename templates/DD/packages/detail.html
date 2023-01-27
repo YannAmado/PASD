@@ -21,11 +21,50 @@
 
                     <ul class="list-unstyled">
                         <li><i class="fa fa-check text-success"></i>Status: {{package.get_status_display}}</li>
-                        <li><i class="fa fa-check text-success"></i>Delivered by: {{package.delivered_by.first_name}}</li>
+                        <li><i class="fa fa-check text-success"></i>Delivered by: {{deliverer.first_name}} by {{deliverer.vehicle}}</li>
                         <li><i class="fa fa-check text-success"></i>Last update:{{package.updated}}</li>
                     </ul>
                 </div>
-                
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h3 class="box-title mt-5">General Info</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-product">
+                            <tbody>
+                                <tr>
+                                    <td width="390">Send date </td>
+                                    <td>{{package.send_date}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Fragile</td>
+                                    <td>
+                                        {% if package.is_breakable %}
+                                            Yes
+                                        {% else %}
+                                            No
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Perishable</td>
+                                    <td>
+                                        {% if package.is_perishable %}
+                                            Yes
+                                        {% else %}
+                                            No
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Expected deliver date</td>
+                                    <td>{{package.last_delivery.expected_delivery_datetime}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Actual Deliver Date</td>
+                                    <td>{{package.last_delivery.actual_delivery_datetime}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
             </div>
         </div>
     </div>

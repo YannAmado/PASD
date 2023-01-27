@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Package, Employee, Customer
+from .models import Package, Employee, Customer, Delivery
 
 # Register your models here.
 
@@ -20,7 +20,15 @@ class EmployeeAdmin(admin.ModelAdmin):
     
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name']
+    list_display = ['first_name' , 'city', 'country']
     prepopulated_fields = {'slug': ('first_name','last_name')}
+    
+@admin.register(Delivery)
+class DeliveryAdmin(admin.ModelAdmin):
+    list_display = ['expected_delivery_datetime' , 
+                    'actual_delivery_datetime', 'cost_in_cents']
+    
+    
+    
     
     
